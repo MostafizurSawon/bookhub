@@ -1,0 +1,16 @@
+{% for comment in comments %}
+
+<div class="container">
+    <div class="d-flex">
+        <span class="text-info">{{comment.user.first_name}} {{comment.user.last_name}}</span>
+        <span class="ms-5 text-muted">Member since: {{comment.user.account.created_on}}</span>
+    </div>
+    <div class="mt-3">
+        <p>{{comment.text}}
+            <br> <small class="text-muted">{{comment.created_on}}</small>
+        </p>
+        
+    </div>
+</div>
+
+{% endfor %}

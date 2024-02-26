@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="my-5">
+    {% include 'comment_form.html' with form=review_form pk=book.pk comments=comments %}
+
+    {% include 'comments.html' with comments=comments %}
+</div>
+
+{% endblock %}

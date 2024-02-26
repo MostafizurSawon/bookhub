@@ -1,0 +1,41 @@
+<nav class="py-3 navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand text-info" href="{% url 'home' %}">BookHub</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+        </li>
+
+        {% if request.user.is_authenticated %}
+        
+        <li class="nav-item mx-3">
+          <a class="nav-link" href="{% url 'deposit_money' %}">Deposit Money</a>
+        </li>
+          
+        {% endif %}
+      </ul>
+      <div class="d-flex">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item mx-3">
+            <a class="nav-link text-info" href="{% url 'pborrow' %}">{{ request.user.first_name }}'s Profile</a>
+            </li>
+          <li class="nav-item mx-3">
+            <a type="button" class="btn btn-outline-warning" href="{% url 'logout' %}">Logout</a>
+          </li>
+          {% else %}
+            <li class="nav-item mx-3">
+              <a type="button" class="btn btn-outline-light" href="{% url 'register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+              <a type="button" class="btn btn-outline-info" href="{% url 'login' %}">Login</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+  

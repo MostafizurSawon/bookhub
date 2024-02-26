@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="d-flex justify-content-center align-items-center my-5 ">
+        <div>
+            <h2>Search by filter</h2>
+        </div>
+        <div class="mx-2 dropdown">
+            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Filter
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                    <a class="dropdown-item" href="{% url 'home' %}" >ALL</a>
+                </li>
+            {% for category in categories %}
+                <li>
+                    <a class="dropdown-item" href="{% url "filter" category=category.name %}" >{{category.name}}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="my-5"><h3>Result: {{books | length}}</h3></div>
+
+    <div class="row my-4 gy-4 gx-4 d-flex justify-content-center">
+        
+        {% for book in books %}
+            <div class="col-4 d-flex justify-content-center">
+                <div class="card shadow rounded">
+                    <img src="{{book.image.url}}" style="height: 240px;" class="card-img-top" alt="book">
+                    <div class="card-body">
+                        <h6 class="card-text">Book Name:
+                            {{book.title}}</h6>
+                        <p class="card-text"><strong>Description:</strong> {{book.description | truncatechars:70}}</p>
+                        <p class="card-text"><strong>Borrow Price: {{book.borrow_price}} ৳</strong></p>
+                        <div class="d-flex mb-3">
+                            <strong>Category: </strong>
+                            {% for category in book.categories.all %}
+                                <button class="btn-sm btn-warning mx-2">{{category.name}}</button>
+                            {% endfor %}
+                        </div>
+                        <a class="btn btn-outline-primary" href="{% url 'book_detail' pk=book.pk %}">Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        
+    
+    </div>
+    
+
+</div>
